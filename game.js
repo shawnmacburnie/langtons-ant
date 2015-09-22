@@ -9,8 +9,6 @@
     function update() {
         lastRun = new Date();
         player.makeMove();
-        // console.log('finished iteration: ' + (++iteration));
-        // requestAnimationFrame(update);
     }
     var Game = {
         lastRun: 0,
@@ -23,11 +21,6 @@
         },
         play: function () {
             setInterval(update, 0);
-            // if(new Date() - this.lastRun < 1000){
-            //     console.log('here');
-            //     this.player.makeMove();
-            //     this.lastRun = new Date();
-            // }
         }
     };
     window.globals.Game = Game;
