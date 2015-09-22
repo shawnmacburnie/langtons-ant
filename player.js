@@ -69,7 +69,7 @@
         frontPosition: 0,
         grid: {},
         context: {},
-        create: function (context, position, frontPosition) {
+        create: function (context, position, frontPosition, grid) {
             var player = Object.create(this);
             if (position) {
                 player.position = position;
@@ -77,8 +77,12 @@
             if (frontPosition) {
                 player.frontPosition = frontPosition;
             }
+            if (grid) {
+                player.grid = grid;
+            } else {
+                player.grid = window.globals.Grid.create();
+            }
             player.frontPosition = playerMoves.up;
-            player.grid = window.globals.Grid.create();
             player.context = context;
             player.grid.drawGrid(context);
             return player;
@@ -95,7 +99,8 @@
                 //go right
                 next = this.frontPosition.right(this.position);
             }
-            this.position = next[0];
+
+            this.position = this.grid.validateMode(next[0]);
             this.frontPosition = next[1];
             this.grid.update({
                 x, y

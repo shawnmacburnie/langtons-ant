@@ -21,6 +21,19 @@
         at: function (point) {
             return this.points[point.x][point.y];
         },
+        validateMode: function (point) {
+            if (point.x < 0) {
+                point.x = this.size.x -1;
+            } else if (point.x >= this.size.x) {
+                point.x = 0;
+            }
+            if (point.y < 0) {
+                point.y = this.size.y -1;
+            } else if (point.y >= this.size.y) {
+                point.y = 0;
+            }
+            return point;
+        },
         generateGrid: function () {
             for (var x = 0; x < this.size.x; x++) {
                 var row = [];
@@ -42,8 +55,8 @@
             var canvas = document.getElementById('c');
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.beginPath();
-            var height = (canvas.height - 2 * this.padding) / this.size.y,
-                width = (canvas.height - 2 * this.padding) / this.size.x;
+            var height = (canvas.height - 2 * this.padding) / this.size.y - 1,
+                width = (canvas.height - 2 * this.padding) / this.size.x - 1;
             for (var x = 0; x < this.size.x; x++) {
                 for (var y = 0; y < this.size.y; y++) {
                     if (this.points[x][y] === 0) {
