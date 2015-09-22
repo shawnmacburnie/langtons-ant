@@ -4,8 +4,7 @@
         window.globals = {};
     }
     var player = {},
-        lastRun = new Date(),
-        iteration = 0;
+        lastRun = new Date();
     function update() {
         lastRun = new Date();
         player.makeMove();

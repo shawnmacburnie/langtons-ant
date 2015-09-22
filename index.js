@@ -10,8 +10,8 @@ function min(a, b) {
 function init() {
     var c = document.getElementById('c'),
         shape = min(window.innerWidth, window.innerHeight);
-    c.width = shape - 100;
-    c.height = shape - 100;
+    c.width = shape - 15;
+    c.height = shape - 15;
     var context = c.getContext('2d');
     var game = window.globals.Game.create(context);
     game.play(1, 50);
