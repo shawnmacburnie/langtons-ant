@@ -24,7 +24,7 @@
             game.players = [];
             game.grid = window.globals.Grid.create();
             if (!numAnts) {
-                numAnts = 4;
+                numAnts = 5;
             }
             for (var i =0; i < numAnts; i++) {
                 game.players[i] = window.globals.Player.create(game.grid.size);

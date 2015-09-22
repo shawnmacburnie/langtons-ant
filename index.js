@@ -2,10 +2,8 @@
 
 function min(a, b) {
     if (a < b) {
-    	console.log(a + ' is less then ' + b);
         return a;
     }
-    console.log(b + ' is less then ' + a);
     return b;
 }
 
