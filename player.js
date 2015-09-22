@@ -71,31 +71,40 @@
         },
         frontPosition: 0,
         grid: {},
-        context: {},
         colors: ['#B894FF', '#19A319'],
-        create: function (context, position, frontPosition, colors, grid) {
+        create: function (boardSize, position, colors) {
             var player = Object.create(this);
             if (position) {
                 player.position = position;
             }
-            if (frontPosition) {
-                player.frontPosition = frontPosition;
-            }
-            if (grid) {
-                player.grid = grid;
-            } else {
-                player.grid = window.globals.Grid.create();
-            }
+            // if (grid) {
+            //     player.grid = grid;
+            // } else {
+            //     player.grid = window.globals.Grid.create();
+            // }
             if (colors) {
                 playerMoves.colors = colors;
             }
+            this.boardSize = boardSize;
             player.frontPosition = playerMoves.up;
-            player.context = context;
-            player.grid.drawGrid(context);
+            // player.grid.drawGrid(context);
             return player;
         },
-        makeMove: function () {
-            var currentPos = this.grid.at(this.position),
+        validateMode: function (point) {
+            if (point.x < 0) {
+                point.x = this.boardSize.x - 1;
+            } else if (point.x >= this.boardSize.x) {
+                point.x = 0;
+            }
+            if (point.y < 0) {
+                point.y = this.boardSize.y - 1;
+            } else if (point.y >= this.boardSize.y) {
+                point.y = 0;
+            }
+            return point;
+        },
+        makeMove: function (grid) {
+            var currentPos = grid.at(this.position),
                 x = this.position.x,
                 y = this.position.y,
                 next = {};
@@ -106,12 +115,9 @@
                 //go right
                 next = this.frontPosition.right(this.position, this.colors);
             }
-            this.position = this.grid.validateMode(next[0]);
+            this.position = this.validateMode(next[0]);
             this.frontPosition = next[1];
-            this.grid.update({
-                x, y
-            }, this.context, next[2]);
-            this.drawPlayer();
+            return [{x:x,y:y}, next[2]];
         },
         drawPlayer: function () {}
     };

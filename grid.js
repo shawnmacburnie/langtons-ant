@@ -21,19 +21,6 @@
         at: function (point) {
             return this.points[point.x][point.y].value;
         },
-        validateMode: function (point) {
-            if (point.x < 0) {
-                point.x = this.size.x - 1;
-            } else if (point.x >= this.size.x) {
-                point.x = 0;
-            }
-            if (point.y < 0) {
-                point.y = this.size.y - 1;
-            } else if (point.y >= this.size.y) {
-                point.y = 0;
-            }
-            return point;
-        },
         generateGrid: function () {
             for (var x = 0; x < this.size.x; x++) {
                 var row = [];
@@ -45,7 +32,7 @@
                 this.points.push(row);
             }
         },
-        update: function (position, context, color) {
+        update: function (position, color) {
             if (this.points[position.x][position.y].value) {
                 this.points[position.x][position.y] = {
                     value: 0,
@@ -57,7 +44,7 @@
                     color: color
                 };
             }
-            this.drawGrid(context);
+            // this.drawGrid(context);
         },
         drawGrid: function (context) {
             var canvas = document.getElementById('c');
